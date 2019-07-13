@@ -9,34 +9,41 @@ function Teacher(Name, Surname, Age, Educations, Experience) {
     this.Name = Name;
     this.Surname = Surname;
     this.Age = Age;
-    this.Educations = [];
-    this.Experience = [];
+    this.Educations = Educations;
+    this.Experience = Experience;
 
 }
 
 function Class(Name, Room, Teacher, Students, TotalDuration) {
     this.Name = Name;
     this.Room = Room;
-    this.Teacher = new Teacher(this.Name, this.Surname, this.Age, this.Educations, this.Experience);
-    this.Students = [];
+    this.Teacher = Teacher;
+    this.Students = Students;
     this.TotalDuration = TotalDuration;
-    this.studentName = new Student(this.Name, this.Surname, this.Age, this.PhoneNumber);
 
-    getStudentsList() = function (Students) {
-        for (let studentName of Students) {
-            console.log(`${this.Student.Name}-${this.Student.Surname}`);
+    this.getStudentsList = function () {
+        for (let Student of this.Students) {
+            console.log(`${Student.Name} ${Student.Surname}`);
         }
     }
 
-//     this.getStudentPhoneNumber() = function (studentName) {
-//         for (let studentName of Students) {
-//             console.log(`${this.Student.PhoneNumber}`);
-//         }
-//     }
-// }
+    this.getStudentPhoneNumber = function (studentName) {
+        for (let Student of Students) {
+            if (Student.Name === studentName) {
+                return Student.PhoneNumber;
+            }
+        }
+        console.log(`${Student.PhoneNumber} is not here`);
+    }
+}
 
-var Ofa = new Student('Ofa', 'Rahmanova', 19, 5466746);
+console.log(new Student('Ofa', 'Rahmanova', 19, 5466746));
 var Nara = new Student('Narmin', 'Rahmanova', 15, 5464246);
-// var Yolchu = new Teacher('Yolchu', 'Nasib', 40, 4556677, { 'school': 'uni' }, { 'ca': 'school' });
-// var Kabinet = new Class('CS', 406, Yolchu.Teacher(), Student.getStudentsList(), 340);
+var Yolchu = new Teacher('Yolchu', 'Nasib', 40, 4556677, ['school', 'uni'], ['ca', 'school']);
 
+const Kabinet = new Class('CS', 406,
+    [new Teacher('Yolchu', 'Nasib', 40, 4556677, ['school', 'uni'], ['ca', 'school'])],
+    [new Student('Narmin', 'Rahmanova', 15, 5464246), new Student('Ofa', 'Rahmanova', 19, 5466746)],
+    340);
+
+Kabinet.getStudentsList();
